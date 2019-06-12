@@ -4,6 +4,7 @@ Work done by me on ROS and simulation on Gazebo.
 The catkin workspace (catkin-ws) has two packages
 - my_bot
 - navig
+
 The package my_bot contains a urdf file which was developed from the [urdf tutorials](http://wiki.ros.org/urdf/Tutorials) 
 which can be imported on Gazebo.
 

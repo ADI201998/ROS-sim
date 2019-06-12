@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<!-- Revolute-Revolute Manipulator -->
+<robot name="bot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Constants for robot dimensions -->
+  <xacro:property name="pi" value="3.1415926535897931"/>
+  <xacro:property name="width" value="0.4" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="height" value="0.1" /> <!-- Link 1 -->
+  <xacro:property name="length" value="0.6" /> <!-- Link 2 -->
+  <xacro:property name="diameter" value="0.1" /> <!-- Link 3 -->
+  <xacro:property name="xval" value="0.2" /> <!-- Link 3 -->
+  <xacro:property name="yval" value="0.15" /> <!-- Link 3 -->
+  <xacro:property name="zval" value="0.15" /> <!-- Link 3 -->  
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+    <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${length} ${width} ${height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+<xacro:macro name="wheel" params="pre suf ref var">
+  <link name="${pre}_${suf}_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="${height}" radius="${height}"/>
+      </geometry>
+      <origin rpy="${pi/2} 0 0"/>
+    <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="${pi/2} 0 0" />
+      <geometry>
+        <cylinder length="${height}" radius="${height}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_${pre}_${suf}_wheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="${pre}_${suf}_wheel"/>
+    <origin xyz="${xval*ref} ${yval*var} -${zval}"/>
+  </joint>
+</xacro:macro>
+<xacro:wheel pre="right" suf="front" ref="1" var="-1"/>
+<xacro:wheel pre="right" suf="back" ref="-1" var="-1"/>
+<xacro:wheel pre="left" suf="front" ref="1" var="1"/>
+<xacro:wheel pre="left" suf="back" ref="-1" var="1"/>
+
+<xacro:macro name="light" params="pre suf">
+<link name="${pre}_light">
+    <visual>
+      <geometry>
+        <cylinder length="${height}" radius="${height/2}"/>
+      </geometry>
+      <origin rpy="${pi/2} 0 ${pi/2}" xyz="0 0 -0.05"/>
+      <material name="red"/>
+      </visual>
+      <collision>
+      <origin rpy="${pi/2} 0 ${pi/2}" xyz="0 0 -0.05"/>
+      <geometry>
+        <cylinder length="${height}" radius="${height/2}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.25"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_${pre}_light" type="fixed">
+    <parent link="base_link"/>
+    <child link="${pre}_light"/>
+    <origin xyz="0.35 ${yval*suf} 0.05"/>
+    </joint>
+</xacro:macro>
+<xacro:light pre="right" suf="-1"/>
+<xacro:light pre="left" suf="1"/>
+
+
+<link name="kinect_joint">
+    <visual>
+      <geometry>
+        <cylinder length="0.25" radius="${height/2}"/>
+      </geometry>
+      <origin rpy="0 0 0" />
+     <material name="blue"/>
+     </visual>
+     <collision>
+      <origin rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.25" radius="${height/2}"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.75"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_kinect" type="fixed">
+    <parent link="base_link"/>
+    <child link="kinect_joint"/>
+    <origin xyz="-0.15 0 0.175"/>
+    </joint>
+<joint name="this_is_kinect" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.03 0 0.175" rpy="0 0 0"/>
+    <parent link="kinect_joint"/>
+    <child link="kinect_link"/>
+  </joint>
+<!-- Kinect -->
+  <link name="kinect_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://urdf_sim_tutorial/meshes/kinect.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+<link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://urdf_sim_tutorial/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+</link>
+  <joint name="this_is_laser" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.2 0 0.08" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+</robot>

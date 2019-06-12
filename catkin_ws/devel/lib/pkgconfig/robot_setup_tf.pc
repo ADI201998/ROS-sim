@@ -1,0 +1,8 @@
+prefix=/home/adi99/catkin_ws/devel
+
+Name: robot_setup_tf
+Description: Description of robot_setup_tf
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/adi99/catkin_ws/devel/lib 
+Requires: 

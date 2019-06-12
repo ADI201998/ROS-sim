@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/adi99/catkin_ws/src/urdf_sim_tutorial/config/odometry_publisher.cpp
+ros/ros.h
+-
+tf/transform_broadcaster.h
+-
+nav_msgs/Odometry.h
+-
+

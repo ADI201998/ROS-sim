@@ -1,0 +1,8 @@
+prefix=/home/adi99/catkin_ws/devel
+
+Name: rqt_mypkg
+Description: Description of rqt_mypkg
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/adi99/catkin_ws/devel/lib 
+Requires: 

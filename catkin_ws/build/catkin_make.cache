@@ -1,0 +1,2 @@
+gazebo_ros_pkgs/gazebo_dev:gazebo_ros_pkgs/gazebo_msgs:gazebo_ros_pkgs/gazebo_plugins:gazebo_ros_pkgs/gazebo_ros:gazebo_ros_pkgs/gazebo_ros_control:gazebo_ros_pkgs/gazebo_ros_pkgs:my_bot:navig:urdf_tutorial
+-DCATKIN_DEVEL_PREFIX=/home/adi99/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/adi99/catkin_ws/install -G Unix Makefiles

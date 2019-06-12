@@ -1,0 +1,416 @@
+<?xml version="1.0"?>
+<robot name="my_bot">
+
+<material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+<material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+<material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+<material name="red">
+    <color rgba="1 0 0 1"/>
+  </material>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <box size="0.6 0.4 0.1"/>
+      </geometry>
+    <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.6 0.4 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+
+  <link name="right_front_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+      <origin rpy="1.57075 0 0"/>
+    <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57075 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_right_front_wheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="right_front_wheel"/>
+    <origin xyz="0.2 -0.15 -0.15"/>
+  </joint>
+     <gazebo reference="right_front_wheel">
+      <mu1 value="100.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+  <transmission name="right_front_wheel_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+       <actuator name="right_front_wheel_motor">
+         <mechanicalReduction>1</mechanicalReduction>
+       </actuator>
+       <joint name="base_to_right_front_wheel">
+         <hardwareInterface>VelocityJointInterface</hardwareInterface>
+       </joint>
+   </transmission>
+
+  <link name="right_back_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" />
+    <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57075 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_right_back_wheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="right_back_wheel"/>
+    <origin xyz="-0.2 -0.15 -0.15"/>
+  </joint>
+  <gazebo reference="right_back_wheel">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+  <transmission name="right_back_wheel_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+       <actuator name="right_back_wheel_motor">
+         <mechanicalReduction>1</mechanicalReduction>
+       </actuator>
+       <joint name="base_to_right_back_wheel">
+         <hardwareInterface>VelocityJointInterface</hardwareInterface>
+       </joint>
+   </transmission>
+
+  <link name="left_front_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+      <origin rpy="1.57075 0 0"/>
+    <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57075 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_left_front_wheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="left_front_wheel"/>
+    <origin xyz="0.2 0.15 -0.15"/>
+  </joint>
+  <gazebo reference="left_front_wheel">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+  <transmission name="left_front_wheel_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+       <actuator name="left_front_wheel_motor">
+         <mechanicalReduction>1</mechanicalReduction>
+       </actuator>
+       <joint name="base_to_left_front_wheel">
+         <hardwareInterface>VelocityJointInterface</hardwareInterface>
+       </joint>
+   </transmission>
+
+  <link name="left_back_wheel">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+      <origin rpy="1.57075 0 0" />
+    <material name="black"/>
+    </visual>
+    <collision>
+      <origin rpy="1.57075 0 0" />
+      <geometry>
+        <cylinder length="0.1" radius="0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2.5"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_left_back_wheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 1 0"/>
+    <parent link="base_link"/>
+    <child link="left_back_wheel"/>
+    <origin xyz="-0.2 0.15 -0.15"/>
+  </joint>
+  <gazebo reference="left_back_wheel">
+      <mu1 value="200.0"/>
+      <mu2 value="100.0"/>
+      <kp value="10000000.0" />
+      <kd value="1.0" />
+      <material>Gazebo/Grey</material>
+    </gazebo>
+  <transmission name="left_back_wheel_trans">
+       <type>transmission_interface/SimpleTransmission</type>
+       <actuator name="left_back_wheel_motor">
+         <mechanicalReduction>1</mechanicalReduction>
+       </actuator>
+       <joint name="base_to_left_back_wheel">
+         <hardwareInterface>VelocityJointInterface</hardwareInterface>
+       </joint>
+   </transmission>
+
+<link name="right_light">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin rpy="1.57075 0 1.57075" xyz="0 0 -0.05"/>
+      <material name="red"/>
+      </visual>
+      <collision>
+      <origin rpy="1.57075 0 1.57075" xyz="0 0 -0.05"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.25"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_right_light" type="fixed">
+    <parent link="base_link"/>
+    <child link="right_light"/>
+    <origin xyz="0.35 -0.15 0.05"/>
+    </joint>
+
+  <link name="left_light">
+    <visual>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+      <origin rpy="1.57075 0 1.57075" xyz="0 0 -0.05"/>
+     <material name="red"/>
+     </visual>
+     <collision>
+      <origin rpy="1.57075 0 1.57075" xyz="0 0 -0.05"/>
+      <geometry>
+        <cylinder length="0.1" radius="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.25"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_left_light" type="fixed">
+    <parent link="base_link"/>
+    <child link="left_light"/>
+    <origin xyz="0.35 0.15 0.05"/>
+    </joint>
+
+<link name="kinect_joint">
+    <visual>
+      <geometry>
+        <cylinder length="0.25" radius="0.05"/>
+      </geometry>
+      <origin rpy="0 0 0" />
+     <material name="blue"/>
+     </visual>
+     <collision>
+      <origin rpy="0 0 0" />
+      <geometry>
+        <cylinder length="0.25" radius="0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1.75"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </link>
+  <joint name="base_to_kinect" type="fixed">
+    <parent link="base_link"/>
+    <child link="kinect_joint"/>
+    <origin xyz="-0.15 0 0.175"/>
+    </joint>
+
+  <!-- Kinect -->
+  <link name="kinect_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_bot/meshes/kinect.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  <!-- kinect -->
+  <gazebo reference="kinect_link">
+   <sensor name="camera" type="depth">
+        <update_rate>20</update_rate>
+        <camera>
+          <horizontal_fov>1.047198</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.05</near>
+            <far>3</far>
+          </clip>
+        </camera>
+	<plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
+          <baseline>0.2</baseline>
+          <alwaysOn>true</alwaysOn>
+          <!-- Keep this zero, update_rate in the parent <sensor> tag
+            will control the frame rate. -->
+          <updateRate>0.0</updateRate>
+          <cameraName>camera_ir</cameraName>
+          <imageTopicName>/camera/rgb/image_rect_color</imageTopicName>
+          <cameraInfoTopicName>/camera/depth/camera_info</cameraInfoTopicName>
+          <depthImageTopicName>/camera/depth/image_depth</depthImageTopicName>
+          <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
+          <pointCloudTopicName>/voxel_cloud</pointCloudTopicName>
+          <frameName>kinect_link</frameName>
+          <pointCloudCutoff>0.5</pointCloudCutoff>
+          <distortionK1>0</distortionK1>
+          <distortionK2>0</distortionK2>
+          <distortionK3>0</distortionK3>
+          <distortionT1>0</distortionT1>
+          <distortionT2>0</distortionT2>
+          <CxPrime>0</CxPrime>
+          <Cx>0</Cx>
+          <Cy>0</Cy>
+          <focalLength>0</focalLength>
+          <hackBaseline>0</hackBaseline>
+        </plugin>
+      </sensor>
+  </gazebo>
+</link>
+<joint name="this_is_kinect" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.03 0 0.175" rpy="0 0 0"/>
+    <parent link="kinect_joint"/>
+    <child link="kinect_link"/>
+  </joint>
+
+  <!-- Hokuyo -->
+  <link name="hokuyo_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://my_bot/meshes/hokuyo.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+<gazebo reference="hokuyo_link">
+    <sensor type="gpu_ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+        <topicName>/bot/laser/scan</topicName>
+        <frameName>hokuyo_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo> 
+</link>
+<joint name="this_is_laser" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.2 0 0.1" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="hokuyo_link"/>
+  </joint>
+
+
+  <gazebo>
+     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+       <robotNamespace>/</robotNamespace>
+     </plugin>
+   </gazebo>
+</robot>
